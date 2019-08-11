@@ -9,6 +9,8 @@ import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import List from './List';
+
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -99,7 +101,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['coffee type', 'bean type', 'coffee maker'];
 }
 
 function getStepContent(step) {
@@ -114,10 +116,21 @@ function getStepContent(step) {
       return 'Unknown step';
   }
 }
-
+function getStepList(step) {
+  switch (step) {
+    case 0:
+      return ['Turkish', 'Espresso', 'Paper Filter', 'Metal Filter', 'French Press'];
+    case 1:
+      return ['Taste of Austin', 'Cocout Run', 'Breakfast', 'Other'];
+    case 2:
+      return ['Brville', "De'Longhi", 'Mr. Coffee', 'La Pavni', 'Saeco'];
+    default:
+      return [];
+  }
+}
 export default function CustomizedSteppers(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   function handleNext() {
@@ -155,6 +168,7 @@ export default function CustomizedSteppers(props) {
         ) : (
           <div> 
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <List onClick={handleNext} options={getStepList(activeStep)} />
             <div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
