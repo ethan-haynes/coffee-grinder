@@ -84,6 +84,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '90%',
   },
+  rootButtons: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
   button: {
     marginRight: theme.spacing(1),
   },
@@ -124,7 +129,6 @@ export default function CustomizedSteppers(props) {
   }
 
   function handleReset() {
-    console.log(props.callback)
     props.callback()
     setActiveStep(0);
   }
@@ -138,18 +142,18 @@ export default function CustomizedSteppers(props) {
           </Step>
         ))}
       </Stepper>
-      <div>
+      <div className={classes.rootButtons}>
         {activeStep === steps.length ? (
-          <div>
+          <span>
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
             </Button>
-          </div>
+          </span>
         ) : (
-          <div>
+          <div> 
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
