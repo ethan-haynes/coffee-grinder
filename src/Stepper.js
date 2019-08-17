@@ -9,8 +9,13 @@ import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import List from './List';
 import Recipe from './Recipe';
+import Settings from './Settings';
+import AddOn1 from './AddOn1';
+import AddOn2 from './AddOn2';
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -95,8 +100,10 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
   },
   instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    textAlign: 'center',
+    fontSize: 24,
   },
 }));
 
@@ -159,7 +166,41 @@ export default function CustomizedSteppers(props) {
         {activeStep === steps.length ? (
           <span>
             <Typography className={classes.instructions}>
-              <Recipe />
+              <Grid container spacing={3}>
+                <Grid item xs={6}>
+                  <Settings />
+                </Grid>
+                <Grid item xs>
+                  <Typography className={classes.instructions}>
+                  Settings For A Perfect Grind 
+                  </Typography>
+                </Grid>
+            </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs>
+                  <Typography className={classes.instructions}>
+                  A Recipe Picked For You 
+                  </Typography>
+                </Grid>
+                <Grid item xs>
+                  <Recipe />
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item xs={11}>
+                  <Typography className={classes.instructions}>
+                    Try it with 
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs>
+                  <AddOn1 />
+                </Grid>
+                <Grid item xs>
+                  <AddOn2 />
+                </Grid>
+            </Grid>
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
@@ -173,14 +214,6 @@ export default function CustomizedSteppers(props) {
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-            {/*<Button
-                variant="contained"
-                color="red"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>*/}
             </div>
           </div>
         )}
