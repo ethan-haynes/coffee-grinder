@@ -8,6 +8,10 @@ import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import Avatar from '@material-ui/core/Avatar';
 
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -17,6 +21,14 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: 'light-grey'
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    alignItems: 'center',
+    color: theme.palette.text.secondary,
+    display: 'flex',
+    flexDirection: 'column'
   }
 }));
 
@@ -27,23 +39,32 @@ function ListItemLink(props) {
 export default function SimpleList(props) {
   const classes = useStyles();
 
+  const chunkIt = arr => arr.reduce((all,one,i) => {
+    const ch = Math.floor(i/3); 
+    all[ch] = [].concat((all[ch]||[]),one); 
+    return all
+  }, [])
+
+  const buildGrid = arr => (
+    <Grid container spacing={3}>
+        {arr.map( option => (
+            <Grid item xs>
+                <Paper className={classes.paper} onClick={props.onClick}>
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                        {option[0]}
+                    </Avatar>
+                    {option}
+                </Paper>
+            </Grid>
+        ))}
+    </Grid>
+  )
+
   return (
     <div className={classes.root}>
-      <List component="nav" aria-label="main mailbox folders">
-        { props.options.map( option => (
-        <span>    
-            <ListItem button alignItems onClick={props.onClick}>
-              <ListItemIcon>
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                    {option[0]}
-                </Avatar>
-              </ListItemIcon>
-                <ListItemText primary={option} />
-            </ListItem>
-            <Divider component="li" />
-        </span>
-        ))}
-      </List>
+      {chunkIt(props.options).map(options => (
+        buildGrid(options) 
+      ))}
     </div>
   );
 }
