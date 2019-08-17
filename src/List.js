@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,6 +15,9 @@ const useStyles = makeStyles(theme => ({
     minWidth: 600,
     backgroundColor: theme.palette.background.paper,
   },
+  avatar: {
+    backgroundColor: 'light-grey'
+  }
 }));
 
 function ListItemLink(props) {
@@ -30,9 +34,9 @@ export default function SimpleList(props) {
         <span>    
             <ListItem button alignItems onClick={props.onClick}>
               <ListItemIcon>
-                <Icon>
-                  local_drink
-                </Icon>
+                <Avatar aria-label="recipe" className={classes.avatar}>
+                    {option[0]}
+                </Avatar>
               </ListItemIcon>
                 <ListItemText primary={option} />
             </ListItem>

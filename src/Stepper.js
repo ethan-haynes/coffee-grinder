@@ -10,7 +10,7 @@ import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import List from './List';
-
+import Recipe from './Recipe';
 
 const QontoConnector = withStyles({
   alternativeLabel: {
@@ -20,12 +20,12 @@ const QontoConnector = withStyles({
   },
   active: {
     '& $line': {
-      borderColor: '#784af4',
+      borderColor: 'red',
     },
   },
   completed: {
     '& $line': {
-      borderColor: '#784af4',
+      borderColor: 'red',
     },
   },
   disabled: {
@@ -47,7 +47,7 @@ const useQontoStepIconStyles = makeStyles({
     alignItems: 'center',
   },
   active: {
-    color: '#784af4',
+    color: 'red',
   },
   circle: {
     width: 8,
@@ -56,7 +56,7 @@ const useQontoStepIconStyles = makeStyles({
     backgroundColor: 'currentColor',
   },
   completed: {
-    color: '#784af4',
+    color: 'red',
     zIndex: 1,
     fontSize: 18,
   },
@@ -159,7 +159,7 @@ export default function CustomizedSteppers(props) {
         {activeStep === steps.length ? (
           <span>
             <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
+              <Recipe />
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
@@ -173,14 +173,14 @@ export default function CustomizedSteppers(props) {
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-              <Button
+            {/*<Button
                 variant="contained"
-                color="primary"
+                color="red"
                 onClick={handleNext}
                 className={classes.button}
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
+              </Button>*/}
             </div>
           </div>
         )}
