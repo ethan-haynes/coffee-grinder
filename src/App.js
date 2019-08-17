@@ -7,6 +7,10 @@ import { red } from '@material-ui/core/colors'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import logo from './logo.jpeg'
+
 const useStyles = makeStyles(theme => ({
   iconHover: {
     fontSize: 70,
@@ -18,6 +22,10 @@ const useStyles = makeStyles(theme => ({
   paper: {
     width: 100,
     margin: 20,
+  },
+  logo: {
+    top: 'auto',
+    bottom: 0,
   }
 }))
 
@@ -26,6 +34,9 @@ function App() {
   const [isStarted, setIsStarted] = useState(false);
   return (
     <div className="App" className="App-header">
+        <div className={classes.logo}>
+            <img src={logo} />
+        </div>
         {!isStarted &&
             <Paper className={classes.paper} onClick={()=>setIsStarted(true)}>
             <Typography variant="h5" component="h3">

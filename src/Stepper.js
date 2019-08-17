@@ -202,19 +202,29 @@ export default function CustomizedSteppers(props) {
                 </Grid>
             </Grid>
             </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
+            <Grid container>
+              <Grid item xs={5}></Grid>
+              <Grid item xs={2}>
+                <Button onClick={handleReset} className={classes.button}>
+                    Reset
+                </Button>
+              </Grid>
+              <Grid item xs={5}></Grid>
+            </Grid>
           </span>
         ) : (
           <div> 
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <List onClick={handleNext} options={getStepList(activeStep)} />
-            <div>
+            <Grid container>
+              <Grid item xs={5}></Grid>
+              <Grid item xs={2}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-            </div>
+              </Grid>
+              <Grid item xs={5}></Grid>
+            </Grid>
           </div>
         )}
       </div>
