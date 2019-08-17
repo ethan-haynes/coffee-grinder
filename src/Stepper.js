@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 import List from './List';
 import Recipe from './Recipe';
 import Settings from './Settings';
@@ -105,6 +107,12 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     fontSize: 24,
   },
+  rating: {
+    display: 'flex',
+    fontSize: 16,
+    color: 'grey',
+    padding: 15
+  }
 }));
 
 function getSteps() {
@@ -114,11 +122,11 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return 'Select coffee type';
     case 1:
-      return 'What is an ad group anyways?';
+      return 'Now select a coffee bean';
     case 2:
-      return 'This is the bit I really care about!';
+      return 'Pick out your coffee maker';
     default:
       return 'Unknown step';
   }
@@ -136,6 +144,7 @@ function getStepList(step) {
   }
 }
 export default function CustomizedSteppers(props) {
+  const [value, setValue] = React.useState(4);
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -166,13 +175,26 @@ export default function CustomizedSteppers(props) {
         {activeStep === steps.length ? (
           <span>
             <Typography className={classes.instructions}>
+            Here Is Our Suggestion!
+            </Typography>
+            <Typography className={classes.instructions}>
               <Grid container spacing={3}>
                 <Grid item xs={6}>
                   <Settings />
+                  <div className={classes.rating}>
+                    <Rating
+                      name="simple-controlled"
+                      value={value}
+                      disabled
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                    />(121)
+                  </div>
                 </Grid>
                 <Grid item xs>
                   <Typography className={classes.instructions}>
-                  Settings For A Perfect Grind 
+                    Settings For A Perfect Grind
                   </Typography>
                 </Grid>
             </Grid>
